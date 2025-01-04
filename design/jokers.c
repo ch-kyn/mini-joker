@@ -1,17 +1,52 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "cards.h"
+#include "items.h"
 
+void start_blind(Card inventory[], int inventory_size, int blind);
 int colors_per_line(const char* line);
-int print_card(const char* card[CARD_LENGTH], const char* colors[CARD_LENGTH][MAX_COLORS]);
 int print_card_line(const char* card[CARD_LENGTH], const char* colors[CARD_LENGTH][MAX_COLORS], int num_line);
 
+// should probably use malloc() for this later... anyways
+    // need to check for if jokers or tarot/planet
+    // and its colors
+    // card struct which says -> own = bool
+    
+char* test_deck[] = {
+    // add later--make the creation of these cards more dynamic
+        // use integers to access them instead?
+};
+
 int main(void) {
-    print_card(FIBONACCI, C_FIBONACCI);
-    print_card(DNA, C_DNA);
-    print_card(FOUR_FINGERS, C_FOUR_FINGERS);
+    // if copy > 1 ... include in inventory
+    Card test_inventory[] = {
+        fibonacci, dna, four_fingers
+    }; 
+
+    start_blind(test_inventory, 3, 0);
+    // print_card(FOUR_FINGERS, C_FOUR_FINGERS);
 }
+
+void start_blind(Card inventory[], int inventory_size, int blind) {
+    if (blind == 0) {   
+        for (int i = 0; i < 12; i++) {
+            // to make each card align from top to bottom, print necessary cards within 'inventory' line by line
+            printf("%s", score_board_01[i]);
+            printf("  ");
+
+            // iterate over the inventory of cards
+            for (int j = 0; j < inventory_size; j++) {
+                if (i < CARD_LENGTH) {
+                    print_card_line(inventory[j].art, inventory[j].color, i); // print the i-th row of the j-th card's art
+                    printf("  ");
+                }
+            }
+
+            printf("\n");
+        }
+    }
+}
+
 
 // Find out how many colors (escapes included) there are per line of a card by locating "%s"
 int colors_per_line(const char* line) {
@@ -29,6 +64,7 @@ int colors_per_line(const char* line) {
 
 // add a manual check to make sure color does not exceed maximum defined colors?
 
+// utilize function to change for 'highest hand decrease' boss fight(?)
 // Find the line of a card with the highest color count (escapes included)
 /* int max_colors(const char* card[CARD_LENGTH]) {
     int max_count = 0;
@@ -43,45 +79,6 @@ int colors_per_line(const char* line) {
 
     return max_count;
 } */
-
-// Print each line of a card, with its colors
-int print_card(const char* card[CARD_LENGTH], const char* colors[CARD_LENGTH][MAX_COLORS]) {
-    for (int i = 0; i < CARD_LENGTH; i++) {
-        int num_colors = colors_per_line(card[i]); 
-
-        // sligh abomination, but at least it works T_T
-        switch (num_colors) {
-            case 2:
-                printf(card[i], colors[i][0], colors[i][1]);
-                break;
-            case 4:
-                printf(card[i], colors[i][0], colors[i][1], colors[i][2], colors[i][3]);
-                break;
-            case 6:
-                printf(card[i], colors[i][0], colors[i][1], colors[i][2], colors[i][3], colors[i][4], colors[i][5]);
-                break;
-            case 8:
-                printf(card[i], colors[i][0], colors[i][1], colors[i][2], colors[i][3], colors[i][4], colors[i][5], colors[i][6], colors[i][7]);
-                break;
-            case 10:
-                printf(card[i], colors[i][0], colors[i][1], colors[i][2], colors[i][3], colors[i][4], colors[i][5], colors[i][6], colors[i][7], colors[i][8], colors[i][9]);
-                break;
-            case 12:
-                printf(card[i], colors[i][0], colors[i][1], colors[i][2], colors[i][3], colors[i][4], colors[i][5], colors[i][6], colors[i][7], colors[i][8], colors[i][9], colors[i][10], colors[i][11]);
-                break;
-            case 14:
-                printf(card[i], colors[i][0], colors[i][1], colors[i][2], colors[i][3], colors[i][4], colors[i][5], colors[i][6], colors[i][7], colors[i][8], colors[i][9], colors[i][10], colors[i][11], colors[i][12], colors[i][13]);
-                break;
-            case 16:
-                printf(card[i], colors[i][0], colors[i][1], colors[i][2], colors[i][3], colors[i][4], colors[i][5], colors[i][6], colors[i][7], colors[i][8], colors[i][9], colors[i][10], colors[i][11], colors[i][12], colors[i][13], colors[i][14], colors[i][15]);
-                break;
-        }    
-
-        printf("\n");
-    }
-
-    return 0;
-}
 
 int print_card_line(const char* card[CARD_LENGTH], const char* colors[CARD_LENGTH][MAX_COLORS], int num_line) {
     if (num_line >= 0 && num_line <= 9) {
@@ -114,7 +111,7 @@ int print_card_line(const char* card[CARD_LENGTH], const char* colors[CARD_LENGT
                 break;
         } 
 
-        printf("\n");
+        // printf("\n");
     }
 
     return 0;
