@@ -3,27 +3,53 @@
 
 #include "colors.h" // make color constants available
 
-#define CARD_LENGTH 10
-// magic number defining that a line can have no more than 8 colors (escapes included)
-#define MAX_COLORS 16 
+#define CARD_LENGTH 9
+// magic number defining that a line can have no more than 10 colors (escapes included)
+#define MAX_COLORS 20
+#define BOARD_WIDTH 35
+
+// four types of cards within the game
+typedef enum {
+    PLAYING,
+    JOKER,
+    PLANET,
+    TAROT
+} CardType;
 
 // custom data type to hold information and styling of a Card (probably needs to be expanded later)
     // add 'rarity'
 typedef struct {
+    CardType type;
     char* name;
     const char* art[CARD_LENGTH];
     const char* color[CARD_LENGTH][MAX_COLORS]; // its associated colors per line
-    int buy_price;
-    int sell_price;
-    int owned;
+    union {
+        struct {
+            int buy_price;
+            int sell_price;
+            int owned;
+        };
+    };
 } Card;
+
+typedef struct {
+    const char* art[36];
+    char* color[36][12];
+} UI;
+
+typedef struct {
+    int round;
+    int actions_taken;
+    int inventory_size;
+    Card* inventory;
+    int deck_size;
+    Card* deck;
+} GameState;
+
+extern UI small_blind;
 
 extern Card fibonacci;
 extern Card dna;
 extern Card four_fingers;
-
-extern char* score_board_01[];
-extern char* score_board_02[];
-extern char* score_board_03[];
-
+extern Card jack_d;
 #endif

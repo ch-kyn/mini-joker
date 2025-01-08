@@ -1,0 +1,19 @@
+    printf("%s╔═══════════╗%s\n", WHITE, ESC);
+    printf("%s║%s%sJ%s%s███%s%s🭁██🭀%s%s███║%s\n", WHITE, ESC, DIAMOND, ESC, WHITE, ESC, DIAMOND, ESC, WHITE, ESC);
+    printf("%s║%s%s•%s%s▎🬹🬹%s%s⣸⣿%s%s▓🬹🬹🮇█║%s\n", WHITE, ESC, DIAMOND, ESC, WHITE, ESC, BLACK, ESC, WHITE, ESC);
+    printf("%s║█▎█%s%s═%s%s⡿%s%s⤬⤬⤬%s␥🮇█║\n", WHITE, ESC, C_FDA200, ESC, BLACK, ESC, C_009CFD, ESC);
+    printf("║█▎🭖⏺════▒🮇█║\n");
+    printf("║███▓🮕█/🮕▒🮇█║\n");
+    printf("║█▎█▓🮕/▒🮕▒🮇█║\n");
+    printf("║█▎█🭡╳╳╳╳🬎🮇•║\n");
+    printf("║██🭖🭛██████j║\n");
+    printf("╚═══════════╝\n");
+
+    int count_letters(char* string) {
+    int count = 0;
+    for (int i = 0; string[i] != '\0'; i++) {
+        count++;
+    }
+
+    return count;
+}
