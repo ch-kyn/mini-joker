@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,7 +5,7 @@
 #include "../design/items.h"
 #include "display_utils.h"
 
-// Checks length of a UTC-8 strin; does not take into account non-composed characters
+// Checks length of a UTC-8 string; does not take into account non-composed characters
 size_t utc8_length(const char* line) {
     size_t count = 0; // keeps track of the number of Unicode code points
     const unsigned char* p = (const unsigned char*) line;
@@ -27,7 +26,7 @@ size_t utc8_length(const char* line) {
 }
 
 // Find out how many colors (escapes included) there are per line of a card by locating "%s"
-int colors_per_line(const char* line) {
+int placeholders_per_line(const char* line) {
     int count = 0;
     int length = strlen(line);
 
@@ -43,7 +42,7 @@ int colors_per_line(const char* line) {
 // Check how many placeholders there are per line, and include neccessary insertions accordingly
 int print_card_line(const char* card[CARD_LENGTH], const char* colors[CARD_LENGTH][MAX_COLORS], int num_line) {
     if (num_line >= 0 && num_line < CARD_LENGTH) {
-        int num_colors = colors_per_line(card[num_line]); 
+        int num_colors = placeholders_per_line(card[num_line]); 
 
         char output[256] = {0};
         sprintf(output, card[num_line], 
@@ -75,7 +74,7 @@ int print_card_line(const char* card[CARD_LENGTH], const char* colors[CARD_LENGT
 
 int print_board_line(const char* board[BOARD_LENGTH], char* colors[BOARD_LENGTH][12], int num_line) {
     if (num_line >= 0 && num_line < 37) {
-        int num_colors = colors_per_line(board[num_line]);
+        int num_colors = placeholders_per_line(board[num_line]);
 
         char output[256] = {0};
         sprintf(output, board[num_line], 
@@ -103,7 +102,7 @@ char* right_pad(char* string, const char* line) {
     int input_length = strlen(string);
 
     // subtract the placeholders from the length of 'line'
-    int trimmed_length = row_length - (colors_per_line(line) * 2);
+    int trimmed_length = row_length - (placeholders_per_line(line) * 2);
     int space_qty = BOARD_WIDTH - trimmed_length - input_length;
 
     char* formatted_string = NULL;
@@ -136,7 +135,7 @@ char* center_pad(char* string1, char* string2,  const char* line, Padding alignm
     int input_length1 = strlen(string1);
     int input_length2 = strlen(string2);
 
-    int trimmed_length = row_length - (colors_per_line(line) * 2);
+    int trimmed_length = row_length - (placeholders_per_line(line) * 2);
 
     int space_qty = BOARD_WIDTH - trimmed_length - (input_length1 + input_length2);
     int space_left = space_qty / 2;
