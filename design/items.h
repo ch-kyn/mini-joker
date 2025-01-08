@@ -7,6 +7,7 @@
 // magic number defining that a line can have no more than 10 colors (escapes included)
 #define MAX_COLORS 20
 #define BOARD_WIDTH 35
+#define BOARD_LENGTH 36
 
 // four types of cards within the game
 typedef enum {
@@ -33,9 +34,9 @@ typedef struct {
 } Card;
 
 typedef struct {
-    const char* art[36];
-    char* color[36][12];
-} UI;
+    const char* art[BOARD_LENGTH];
+    char* color[BOARD_LENGTH][12];
+} Board;
 
 typedef struct {
     int round;
@@ -46,7 +47,7 @@ typedef struct {
     Card* deck;
 } GameState;
 
-extern UI small_blind;
+extern Board small_blind;
 
 extern Card fibonacci;
 extern Card dna;
