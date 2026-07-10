@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: mini-joker
+    env: node
+    buildCommand: |
+      apt-get update
+      apt-get install -y clang libutf8proc-dev
+      make mini-joker
+      cd web && npm install
+    startCommand: cd web && node server.js
