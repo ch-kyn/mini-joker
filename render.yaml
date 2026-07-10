@@ -4,7 +4,7 @@ services:
     env: node
     buildCommand: |
       apt-get update
-      apt-get install -y clang libutf8proc-dev
+      apt-get install -y clang libutf8proc-dev libutf8proc3
       make mini-joker
       cd web && npm install
     startCommand: cd web && node server.js
