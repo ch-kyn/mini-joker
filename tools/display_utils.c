@@ -5,7 +5,7 @@
 #include "../design/items.h"
 #include "display_utils.h"
 
-// Checks length of a UTC-8 string; does not take into account non-composed characters
+// checks length of a UTC-8 string; does not take into account non-composed characters
 size_t utc8_length(const char* line) {
     size_t count = 0; // keeps track of the number of Unicode code points
     const unsigned char* p = (const unsigned char*) line;
@@ -25,7 +25,7 @@ size_t utc8_length(const char* line) {
     return count;
 }
 
-// Find out how many colors (escapes included) there are per line of a card by locating "%s"
+// find out how many colors (escapes included) there are per line of a card by locating "%s"
 int placeholders_per_line(const char* line) {
     int count = 0;
     int length = strlen(line);
@@ -39,8 +39,8 @@ int placeholders_per_line(const char* line) {
     return count;
 }
 
-// Check how many placeholders there are per line, and include neccessary insertions accordingly
-int print_card_line(const char* card[CARD_LENGTH], const char* colors[CARD_LENGTH][MAX_COLORS], int num_line) {
+// check how many placeholders there are per line, and include neccessary insertions accordingly
+int print_card_line(const char* card[CARD_LENGTH], const char* colors[CARD_LENGTH][MAX_COLORS_CARD], int num_line) {
     if (num_line >= 0 && num_line < CARD_LENGTH) {
         int num_colors = placeholders_per_line(card[num_line]); 
 
@@ -64,7 +64,11 @@ int print_card_line(const char* card[CARD_LENGTH], const char* colors[CARD_LENGT
             (num_colors > 16) ? colors[num_line][16] : "",
             (num_colors > 17) ? colors[num_line][17] : "",
             (num_colors > 18) ? colors[num_line][18] : "",
-            (num_colors > 19) ? colors[num_line][19] : "");
+            (num_colors > 19) ? colors[num_line][19] : "",
+            (num_colors > 20) ? colors[num_line][20] : "",
+            (num_colors > 21) ? colors[num_line][21] : "",
+            (num_colors > 22) ? colors[num_line][22] : "",
+            (num_colors > 23) ? colors[num_line][23] : "");
 
             printf("%s", output);
     }
@@ -72,7 +76,7 @@ int print_card_line(const char* card[CARD_LENGTH], const char* colors[CARD_LENGT
     return 0;
 }
 
-int print_board_line(const char* board[BOARD_LENGTH], char* colors[BOARD_LENGTH][12], int num_line) {
+int print_board_line(const char* board[BOARD_LENGTH], char* colors[BOARD_LENGTH][MAX_COLORS_BOARD], int num_line) {
     if (num_line >= 0 && num_line < 37) {
         int num_colors = placeholders_per_line(board[num_line]);
 
@@ -91,7 +95,7 @@ int print_board_line(const char* board[BOARD_LENGTH], char* colors[BOARD_LENGTH]
             (num_colors > 10) ? colors[num_line][10] : "",
             (num_colors > 11) ? colors[num_line][11] : "");
 
-        printf("%s", output);
+            printf("%s", output);
     }
 
     return 0;
@@ -167,4 +171,85 @@ char* center_pad(char* string1, char* string2,  const char* line, Padding alignm
     }
 
     return formatted_string;
+}
+
+void display_interface(Card inventory[], int inventory_size, Card deck[]) {
+    // print the height of the board plus add two additional lines at the bottom
+    for (int i = 0; i < BOARD_LENGTH + 2; i++) {
+        print_board_line(small_blind.art, small_blind.color, i);
+        // space out the scoring board from the cards
+        printf("  ");
+
+        // iterate over the inventory of cards
+        for (int j = 0; j < inventory_size; j++) {
+            // skip first line to create white space
+            if (i == 0) {
+                printf("");
+            // numerate locations of cards if need to swap etc.
+            } else if (i == 1) {
+                int index = 'a' + j;
+
+                if (inventory[j].type == JOKER) {
+                    printf("[%c]           ", index);
+                    
+                    if (j < 2) {
+                        printf("\b\b\b"); // move back cursor for next card
+                    }
+                    
+                // need to add a check for if no jokers before consumables
+                } else if ((inventory[j].type == TAROT || inventory[j].type == PLANET) && (inventory[j - 1].type == JOKER)) {
+                    printf("    [%c]", index);
+                } else {
+                    // add four space to the left to make up for the seperation between jokers and consumables
+                    printf("       [%c]", index);
+                }
+            } else if (i < CARD_LENGTH + 2) {
+                if (inventory[j].type == JOKER) {
+                    print_card_line(inventory[j].art, inventory[j].color, i - 2); // print the i-th row of the j-th card's art                        
+                    printf(" ");
+
+                    // am hard-coding this, ignore for now
+                    // I would need to calculate how many jokers there are, and adapt the \b depending on how many i have
+                    if (j < 2) {
+                        // need to make it more dynamic yaya
+                        printf("\b\b\b");
+                    }
+                }
+                // printf("CCCC");
+                if ((inventory[j].type == TAROT || inventory[j].type == PLANET) && (inventory[j - 1].type == JOKER)) {
+                    printf("    ");
+                }
+
+                if (inventory[j].type == TAROT || inventory[j].type == PLANET) {
+                    // printf("    ");
+                    print_card_line(inventory[j].art, inventory[j].color, i - 2);
+                    
+                    if (j < inventory_size - 1) {
+                        printf("\b\b\b"); // Move back cursor for next card
+                    }
+                }
+            }                
+        }
+
+        // had to move it here as '\b' messed it up
+        if (i == 35) { // need to create a 'check inventory size' function
+            printf("x/y");
+        }
+
+        // iterate over playing cards; needs to be randomized
+        for (int l = 0; l < 8; l++) {
+            if (i >= 26 && i <= 34) {
+                print_card_line(deck[l].art, deck[l].color, i - 26);
+                printf(" ");
+            } else if (i == 25) { // insert letters (change to later) one line before
+                printf("[%i]           ", l + 1);
+            }
+
+            if (l < 7) { // prevent extra spacing after the last card
+                printf("\b\b\b"); // Move the cursor back by 2 spaces to create overlap
+            }
+        }
+
+        printf("\n");
+    }
 }

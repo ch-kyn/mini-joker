@@ -5,9 +5,13 @@
 
 #define CARD_LENGTH 9
 // magic number defining that a line can have no more than 10 colors (escapes included)
-#define MAX_COLORS 20
+#define MAX_COLORS_CARD 24
+#define MAX_COLORS_BOARD 12
 #define BOARD_WIDTH 35
 #define BOARD_LENGTH 36
+
+// store all jokers in an array
+#define ALL_JOKERS 3
 
 // four types of cards within the game
 typedef enum {
@@ -23,7 +27,7 @@ typedef struct {
     CardType type;
     char* name;
     const char* art[CARD_LENGTH];
-    const char* color[CARD_LENGTH][MAX_COLORS]; // its associated colors per line
+    const char* color[CARD_LENGTH][MAX_COLORS_CARD]; // its associated colors per line
     union {
         struct {
             int buy_price;
@@ -35,7 +39,7 @@ typedef struct {
 
 typedef struct {
     const char* art[BOARD_LENGTH];
-    char* color[BOARD_LENGTH][12];
+    char* color[BOARD_LENGTH][MAX_COLORS_BOARD];
 } Board;
 
 typedef struct {
@@ -53,4 +57,9 @@ extern Card fibonacci;
 extern Card dna;
 extern Card four_fingers;
 extern Card jack_d;
+extern Card queen_d;
+extern Card ace_d;
+
+extern Card tarot_test;
+
 #endif

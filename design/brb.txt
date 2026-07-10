@@ -17,3 +17,15 @@
 
     return count;
 }
+
+
+    printf("%s╔═══════════╗%s\n", WHITE, ESC);
+    printf("%s║%s%s𝐀%s%s██████████║%s\n", WHITE, ESC, DIAMOND, ESC, WHITE, ESC);
+    printf("%s║%s%s♦%s%s████%s%s⁜%s%s█████║%s\n", WHITE, ESC, DIAMOND, ESC, WHITE, ESC, DIAMOND, ESC, WHITE, ESC);
+    printf("%s║███%s%s⣠⣾⣿⣷⣄%s%s███║%s\n", WHITE, ESC, DIAMOND, ESC, WHITE, ESC);
+    printf("%s║██%s%s⁜╳╳╳╳╳⁜%s%s██║%s\n", WHITE, ESC, DIAMOND, ESC, WHITE, ESC);
+    printf("%s║███%s%s⠙⢿⣿⡿⠋%s%s███║%s\n", WHITE, ESC, DIAMOND, ESC, WHITE, ESC);
+    printf("%s║█████%s%s⁜%s%s████%s%s♦%s%s║%s\n", WHITE, ESC, DIAMOND, ESC, WHITE, ESC, DIAMOND, ESC, WHITE, ESC);
+    printf("%s║██████████%s%s𝐀%s%s║%s\n", WHITE, ESC, DIAMOND, ESC, WHITE, ESC);
+    printf("%s╚═══════════╝%s\n", WHITE, ESC);                                      
+                     

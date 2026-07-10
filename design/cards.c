@@ -29,7 +29,7 @@ Card fibonacci = {
     },
     .buy_price = 8,
     .sell_price = 4,
-    .owned = 0  
+    .owned = 0
 };
 
 Card dna = {
@@ -59,7 +59,7 @@ Card dna = {
     },
     .buy_price = 8,
     .sell_price = 4,
-    .owned = 0  
+    .owned = 2
 };
 
 Card four_fingers = {
@@ -68,7 +68,7 @@ Card four_fingers = {
     .art = {
         "%s╔═══════════╗%s",
         "%s║𝐉%s%s▒▒▒▒▒▒▒▒▒▒%s%s║%s",
-        "%s║%s%s████%s%s/▒␥%s%s██%s%s@%s%s█%s%s║%s",
+        "%s║%s%s✦███%s%s/▒␥%s%s██%s%s@%s%s█%s%s║%s",
         "%s║%s%s██%s%s@%s%s█%s%s»▓@␥█|%s%s█%s%s║%s",
         "%s║%s%s▓%s%s\\▓\\▓▓██«%s%s▓▓%s%s║%s", 
         "%s║%s%s▒▒%s%s\\▓▓▓▓█/%s%s▒▒%s%s║%s",
@@ -89,34 +89,118 @@ Card four_fingers = {
     },
     .buy_price = 7,
     .sell_price = 3,
-    .owned = 0
+    .owned = 1
 };
 
 Card jack_d = {
     .type = PLAYING,
     .name = "Jack",
-.art = {
-    "%s╔═══════════╗%s",
-    "%s║%s%s𝐉%s%s███%s%s🭖██🭡%s%s🭅%s%s🭀%s%s█║%s",
-    "%s║%s%s♦%s%s███%s%s⣸⣿%s%s▓🮔%s%s█%s%s🭐%s%s█║%s",
-    "%s║█%s%s🭁█%s%s🮗%s%s▓%s%s🭓%s%s█🮨%s%s█%s%s█%s%s█║%s",
-    "%s║%s%s⁜█%s%s║%s%s▓%s%s🮗🮗🮗🮗%s%s▓%s%s🮑🮑%s%s║%s",
-    "%s║%s%s██%s%s║%s%s▓🮕%s%s█/%s%s🮕⏺%s%s█⁜%s%s║%s",
-    "%s║%s%s🭔%s%s⫽%s%s▓▓🮕%s%s/▒%s%s▒%s%s🮕█♦%s%s║%s",
-    "%s║██%s%s⁜▓╳╳╳╳%s%s██%s%s𝐉%s%s║%s",
-    "%s╚═══════════╝%s"
-},
-.color = {
-    {WHITE, ESC},
-    {WHITE, ESC, DIAMOND, ESC, WHITE, ESC, DIAMOND, ESC, BLACK, ESC, C_FDA200, ESC, WHITE, ESC},
-    {WHITE, ESC, DIAMOND, ESC, WHITE, ESC, BLACK, ESC, WHITE, ESC, BLACK, ESC, C_FDA200, ESC, WHITE, ESC},
-    {WHITE, ESC, DIAMOND, ESC, C_FDA200, ESC, DIAMOND, ESC, C_009CFD, ESC, C_FDA200, ESC, BLACK, ESC, C_FDA200, ESC, WHITE, ESC},
-    {WHITE, ESC, DIAMOND, ESC, C_009CFD, ESC, DIAMOND, ESC, C_FDA200, ESC, WHITE, ESC, C_FDA200, ESC, WHITE, ESC},
-    {WHITE, ESC, DIAMOND, ESC, C_009CFD, ESC, DIAMOND, ESC, C_009CFD, ESC, C_FDA200, ESC, DIAMOND, ESC, WHITE, ESC},
-    {WHITE, ESC, DIAMOND, ESC, C_009CFD, ESC, DIAMOND, ESC, C_009CFD, ESC, C_FDA200, ESC, DIAMOND, ESC, WHITE, ESC},
-    {WHITE, ESC, DIAMOND, ESC, WHITE, ESC, DIAMOND, ESC, WHITE, ESC},
-    {WHITE, ESC}
-}
+    .art = {
+        "%s╔═══════════╗%s",
+        "%s║%s%s𝐉%s%s███%s%s🭖██🭡%s%s🭅%s%s🭀%s%s█║%s",
+        "%s║%s%s♦%s%s███%s%s⣸⣿%s%s▓🮔%s%s█%s%s🭐%s%s█║%s",
+        "%s║█%s%s🭁█%s%s🮗%s%s▓%s%s🭓%s%s█🮨%s%s█%s%s█%s%s█║%s",
+        "%s║%s%s⁜█%s%s║%s%s▓%s%s🮗🮗🮗🮗%s%s▓%s%s🮑🮑%s%s║%s",
+        "%s║%s%s██%s%s║%s%s▓🮕%s%s█/%s%s🮕⏺%s%s█⁜%s%s║%s",
+        "%s║%s%s🭔%s%s⫽%s%s▓▓🮕%s%s/▒%s%s▒%s%s🮕█♦%s%s║%s",
+        "%s║██%s%s⁜▓╳╳╳╳%s%s██%s%s𝐉%s%s║%s",
+        "%s╚═══════════╝%s"
+    },
+    .color = {
+        {WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC, DIAMOND, ESC, BLACK, ESC, C_FDA200, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC, BLACK, ESC, WHITE, ESC, BLACK, ESC, C_FDA200, ESC, WHITE, ESC, C_FDA200, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, C_FDA200, ESC, DIAMOND, ESC, C_009CFD, ESC, C_FDA200, ESC, BLACK, ESC, C_FDA200, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, C_009CFD, ESC, DIAMOND, ESC, C_FDA200, ESC, WHITE, ESC, C_FDA200, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, C_009CFD, ESC, DIAMOND, ESC, C_009CFD, ESC, C_FDA200, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, C_009CFD, ESC, DIAMOND, ESC, C_009CFD, ESC, C_FDA200, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC}
+    }
+};
+
+Card queen_d = {
+    .type = PLAYING,
+    .name = "Queen",
+    .art = {
+        "%s╔═══════════╗%s",
+        "%s║%s%s𝐐%s%s██%s%s🭖🭩🭩🭩🭡%s%s█%s%s🭩🭩%s%s║%s",
+        "%s║%s%s♦%s%s██%s%s🭄%s%s⣿%s%s▓%s%s⣷%s%s🮔🬾%s%s█%s%s▌%s%s║%s",
+        "%s║██%s%s▐%s%s🮗%s%s⢿%s%sx%s%s⡿%s%s🮔▌%s%s🭕▌%s%s║%s",
+        "%s║%s%s⁜🭄%s%s║%s%s🮩🮗🮗🮗🮗%s%s▓🭏%s%s▌%s%s║%s",
+        "%s║%s%s⁜█%s%s║%s%s🮕%s%s█\\%s%s🮕%s%s▓▓█%s%s▓║%s",
+        "%s║█%s%s🭕%s%s║%s%s▓%s%s\\▒%s%s▒%s%s▓%s%s║%s%s🭝♦%s%s║%s",
+        "%s║██%s%s╳╳╳╳▓%s%s║%s%s⁜%s%s█%s%s𝐐%s%s║%s",
+        "%s╚═══════════╝%s"
+    },
+    .color = {
+        {WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC, C_FDA200, ESC, WHITE, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC, DIAMOND, ESC, BLACK, ESC, WHITE, ESC, BLACK, ESC, DIAMOND, ESC, WHITE, ESC, C_FDA200, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC, BLACK, ESC, BLACK, ESC, BLACK, ESC, DIAMOND, ESC, C_FDA200, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, C_009CFD, ESC, WHITE, ESC, DIAMOND, ESC, C_FDA200, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, C_009CFD, ESC, C_FDA200, ESC, C_009CFD, ESC, C_FDA200, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, C_009CFD, ESC, C_FDA200, ESC, C_009CFD, ESC, C_FDA200, ESC, DIAMOND, ESC, C_009CFD, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, C_009CFD, ESC, DIAMOND, ESC, WHITE, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC}
+    }
+};
+
+Card ace_d = {
+    .type = PLAYING,
+    .name = "Ace",
+    .art = {
+        "%s╔═══════════╗%s",
+        "%s║%s%s𝐀%s%s██████████║%s",
+        "%s║%s%s♦%s%s██████████║%s",
+        "%s║███%s%s⣠⣾⣿⣷⣄%s%s███║%s",
+        "%s║██%s%s⁜╳╳╳╳╳⁜%s%s██║%s",
+        "%s║███%s%s⠙⢿⣿⡿⠋%s%s███║%s",
+        "%s║██████████%s%s♦%s%s║%s",
+        "%s║██████████%s%s𝐀%s%s║%s",
+        "%s╚═══════════╝%s"                                      
+    },
+    .color = {
+        {WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC, DIAMOND, ESC, WHITE, ESC},
+        {WHITE, ESC}
+    }
+};
+
+Card tarot_test = {
+    .type = TAROT,
+    .name = "The Hanged Man (XII)",
+    .art = {
+        "%s╔═══════════╗%s", 
+        "%s║███████████║%s",
+        "%s║███████████║%s",
+        "%s║███████████║%s",
+        "%s║███████████║%s",
+        "%s║███████████║%s",
+        "%s║███████████║%s",
+        "%s║███████████║%s",
+        "%s╚═══════════╝%s"
+    },
+    .color = {
+        {WHITE, ESC},
+        {WHITE, ESC},
+        {WHITE, ESC},
+        {WHITE, ESC},
+        {WHITE, ESC},
+        {WHITE, ESC},
+        {WHITE, ESC},
+        {WHITE, ESC},    
+        {WHITE, ESC}
+    },
+    .buy_price = 0,
+    .sell_price = 0,
+    .owned = 4
 };
 
 /*
@@ -136,3 +220,4 @@ const char* C_TEMP[CARD_LENGTH][MAX_COLORS] = {
     {WHITE, ESC}
 };
 */
+
